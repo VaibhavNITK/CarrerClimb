@@ -22,7 +22,8 @@ const schema = new mongoose.Schema({
   },
   active:{
     required: true,
-    type: Boolean
+    type: Boolean,
+    default:false,
   },
   createdAt: {
     type: Date,
