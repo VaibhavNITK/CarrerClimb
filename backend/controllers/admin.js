@@ -1,4 +1,4 @@
-import { User } from "../models/user.js";
+import { Admin } from "../models/admin.js";
 import bcrypt from "bcrypt";
 import { sendCookie } from "../utils/features.js";
 import ErrorHandler from "../middlewares/error.js";
@@ -7,44 +7,43 @@ export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email }).select("+password");
+    const admin = await Admin.findOne({ email }).select("+password");
 
-    if (!user) return next(new ErrorHandler("Invalid Email or Password", 400));
+    if (!admin) return next(new ErrorHandler("Invalid Email or Password", 400));
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await bcrypt.compare(password, admin.password);
 
     if (!isMatch)
       return next(new ErrorHandler("Invalid Email or Password", 400));
 
-    sendCookie(user, res, `Welcome back, ${user.name}`, 200);
+    sendCookie(admin, res, `Welcome back, ${admin.name}`, 200);
   } catch (error) {
     next(error);
   }
-};
+}; 
 
 export const register = async (req, res,next) => {
   try {
-    const { name, email, branch, password } = req.body;
+    const { name, email, password } = req.body;
 
-    let user = await User.findOne({ email });
+    let admin = await Admin.findOne({ email });
 
-    if (user) return next(new ErrorHandler("User Already Exist", 400));
+    if (admin) return next(new ErrorHandler("Admin Already Exist", 400));
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    user = await User.create({ name, email, branch, password: hashedPassword });
-
-    sendCookie(user, res, "Registered Successfully", 201);
+    admin = await Admin.create({ name, email, password: hashedPassword });
+console.log(admin)
+    sendCookie(admin, res, "Registered Successfully", 201);
   } catch (error) {
     next(error);
-    
   }
 };
 
 export const getMyProfile = (req, res) => {
   res.status(200).json({
     success: true,
-    user: req.user,
+    admin: req.admin,
   });
 };
 
@@ -58,6 +57,6 @@ export const logout = (req, res) => {
     })
     .json({
       success: true,
-      user: req.user,
+      admin: req.admin,
     });
 };
