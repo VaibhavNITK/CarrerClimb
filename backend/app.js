@@ -6,7 +6,7 @@ import companyRouter from "./routes/company.js"
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.js";
-// import cors from "cors";
+import cors from "cors";
 
 export const app = express();
 
@@ -24,6 +24,7 @@ app.use(cookieParser());
 //     credentials: true,
 //   })
 // );
+app.use(cors({credentials: true, origin: 'http://localhost:3000',methods: ["GET", "POST", "PUT", "DELETE"]}));
 
 // Using routes
 app.use("/api/v1/admin",adminRouter);

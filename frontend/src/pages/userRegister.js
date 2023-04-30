@@ -12,7 +12,7 @@ import {
 }
 from 'mdb-react-ui-kit';
 import "../styles/Login.css"
-function UserLogin() {
+function UserRegister() {
   return (
     <MDBContainer className="my-5">
 
@@ -31,14 +31,15 @@ function UserLogin() {
                 {/* <span className="h1 fw-bold mb-0">Logo</span> */}
               </div>
 
-              <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>User Login here</h5>
-
+              <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>User Register here</h5>
+                <MDBInput wrapperClass='mb-4' label='Name' id='formControlLg' type='name' size="lg"/>
                 <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
+                <MDBInput wrapperClass='mb-4' label='Branch' id='formControlLg' type='branch' size="lg"/>
                 <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
 
-              <MDBBtn className="mb-4 px-5" color='dark' size='lg'>Login</MDBBtn>
+              <MDBBtn className="mb-4 px-5" color='dark' size='lg'>REGISTER</MDBBtn>
               {/* <a className="small text-muted" href="#!">Forgot password?</a> */}
-              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Don't have an account? <a href="/userRegister" style={{color: '#393f81'}}>Register here</a></p>
+              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Already have an account? <a href="/userLogin" style={{color: '#393f81'}}>Login here</a></p>
               <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Are you an Admin? <a href="/adminLogin" style={{color: '#393f81'}}>Login here</a></p>
               <div className='d-flex flex-row justify-content-start'>
                 <a href="#!" className="small text-muted me-1">Terms of use.</a>
@@ -55,4 +56,4 @@ function UserLogin() {
   );
 }
 
-export default UserLogin;
+export default UserRegister;

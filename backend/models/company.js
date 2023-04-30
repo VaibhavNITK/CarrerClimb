@@ -20,6 +20,18 @@ const schema = new mongoose.Schema({
     ref: "User",
     
   },
+  branch:{
+    type:String,
+    required:true,
+  },
+  timeline:{
+    type:Date,
+    required:true,
+  },
+  appliedUsers: [{
+     type :mongoose.Schema.Types.ObjectId,
+     ref: "User" ,
+    }],
   active:{
     required: true,
     type: Boolean,

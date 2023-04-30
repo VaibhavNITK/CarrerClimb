@@ -4,7 +4,7 @@
     height: 100vh;
   }
   
-  .navbar {
+  .lp_navbar {
     display: flex;
     justify-content: right;
     align-items: center;
@@ -15,25 +15,23 @@
     height: 50px;
   }
   
-  .buttons {
+  .lp_buttons {
     justify-content: left;
     display: flex;
     
   }
   
-  .login-button {
-    background-color: black;
-    color: white;
-    border-radius: 10%;
+  .lp_login-button {
+   
+    
+    
     margin-right: 1rem;
   }
-  .register-button{
-    background-color: black;
-    color: white;
-    border-radius: 10%;
+  .lp_register-button{
+  
     margin-right: 1rem;
   }
-  .content {
+  .lp_content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,17 +39,17 @@
     height: calc(100% - 100px);
   }
   
-  .title {
+  .lp_title {
     color: black;
     text-align: center;
   }
   
-  .description {
+  .lp_description {
     color: black;
     text-align: center;
   }
   
-  .cta-button {
+  .lp_cta-button {
     background-color: rgb(161, 107, 107);
     padding: 1rem 2rem;
     border-radius: 20px;
@@ -61,7 +59,7 @@
     margin-top: 2rem;
   }
   
-  .footer {
+  .lp_footer {
     background-color: black;
     color: white;
     padding: 1rem;
@@ -69,5 +67,9 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+  }
+
+  .lp_a{
+    color:white;
   }
   

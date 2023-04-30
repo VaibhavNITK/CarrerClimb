@@ -15,7 +15,9 @@ export const isAuthenticated = async (req, res, next) => {
 
   req.user = await User.findById(decoded._id);
   console.log(req.user)
-  req.admin=await Admin.findById(decoded._id);
-  console.log(req.admin)
+  if(!req.user){
+    req.admin=await Admin.findById(decoded._id);
+    console.log(req.admin)
+  }
   next();
 }; 
