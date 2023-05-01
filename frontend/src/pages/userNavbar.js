@@ -17,7 +17,7 @@ export default function UserNavbar() {
   return (
     <MDBNavbar expand='lg' light bgColor='light'>
       <MDBContainer fluid>
-        <MDBNavbarBrand href='#'>Navbar</MDBNavbarBrand>
+        <MDBNavbarBrand href='/userHomePage'>Home</MDBNavbarBrand>
         <MDBNavbarToggler
           aria-expanded='false'
           aria-label='Toggle navigation'
@@ -27,14 +27,11 @@ export default function UserNavbar() {
         </MDBNavbarToggler>
         <MDBCollapse navbar show={showNavSecond}>
           <MDBNavbarNav>
-            <MDBNavbarLink active aria-current='page' href='#'>
-              Home
-            </MDBNavbarLink>
-            <MDBNavbarLink href='#'>Features</MDBNavbarLink>
-            <MDBNavbarLink href='#'>Pricing</MDBNavbarLink>
-            <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
-              Disabled
-            </MDBNavbarLink>
+            {/* <MDBNavbarLink active aria-current='page' href='#'>Home</MDBNavbarLink> */}
+            <MDBNavbarLink active aria-current='page' href='/pocView'>POC</MDBNavbarLink>
+            <MDBNavbarLink active aria-current='page' href='/userLogin'>Logout</MDBNavbarLink>
+            
+            {/* <MDBNavbarLink href=''>Disabled</MDBNavbarLink> */}
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBContainer>

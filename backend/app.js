@@ -2,7 +2,7 @@ import express from "express";
 import userRouter from "./routes/user.js";
 import adminRouter from "./routes/admin.js"
 import companyRouter from "./routes/company.js"
-// import taskRouter from "./routes/task.js";
+import pocRouter from "./routes/poc.js"
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.js";
@@ -30,7 +30,7 @@ app.use(cors({credentials: true, origin: 'http://localhost:3000',methods: ["GET"
 app.use("/api/v1/admin",adminRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/company", companyRouter);
-
+app.use("/api/v1/poc",pocRouter);
 
 
 
