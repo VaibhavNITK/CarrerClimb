@@ -41,12 +41,29 @@ export const register = async (req, res,next) => {
   }
 };
 
+export const getProfile= async(req,res,next)=>{
+  try{
+    const id= req.params.id;
+    const data= await User.findById(id)
+    if(!data) return next(new ErrorHandler("User doesn't Exist",400))
+    res.status(200).json({
+      success:true,
+      data:data,
+    })
+  }
+  catch(err){
+    next(err)
+  }
+}
+
+
 export const getMyProfile = (req, res) => {
   res.status(200).json({
     success: true,
     user: req.user,
   });
 };
+
 
 export const logout = (req, res) => {
   res

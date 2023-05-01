@@ -5,8 +5,8 @@ import { User } from "../models/user.js";
 
 export const newCom =async (req,res,next)  => {
     try{
-        const { name, description, role, email, branch, timeline, active, appliedUsers } = req.body;
-        const user = await User.find({ email: email });
+        const { name, description, role, pocEmail, branch, timeline, active, appliedUsers } = req.body;
+        const user = await User.find({ email: pocEmail });
         const { _id } = user[0];
         const company = await Company.create({ name, description, role, poc: _id, branch, timeline, active, appliedUsers });
         // console.log(company);
