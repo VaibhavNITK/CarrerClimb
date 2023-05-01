@@ -99,3 +99,16 @@ export const applyComUser = async (req, res, next) => {
   };
   
 
+export const deleteCom= async(req,res,next)=>{
+  try{
+    const company=await Company.findById(req.params.id)
+    await company.deleteOne()
+    res.status(200).json({
+      success:"true",
+      message:"company deleted"
+    })
+  }
+  catch(err){
+    next(err)
+  }
+}
