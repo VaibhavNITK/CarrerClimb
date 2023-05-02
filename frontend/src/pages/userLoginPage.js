@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Link, Navigate } from "react-router-dom";
-import { Context, server } from "../index";
+import { Navigate } from "react-router-dom";
+import { Context} from "../index";
 import {
-  MDBBtn,
+  MDBBtn, 
   MDBContainer,
   MDBCard,
   MDBCardBody,
@@ -53,6 +53,7 @@ function UserLogin() {
 
   if (isAuthenticated) return <Navigate to={"/userHomePage"} />;
   return (
+    
     <MDBContainer className="my-5">
 
       <MDBCard>
@@ -72,7 +73,7 @@ function UserLogin() {
 
               <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>User Login here</h5>
               <form onSubmit={submitHandler}>
-                <MDBInput value={email} onChange={(e) => setEmail(e.target.value)} wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
+                <MDBInput value={email} onChange={(e) => setEmail(e.target.value)} wrapperClass='mb-4' label='Email address' id='formControlLg1' type='email' size="lg"/>
                 <MDBInput value={password} onChange={(e) => setPassword(e.target.value)} wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
 
               <MDBBtn disabled={loading} className="mb-4 px-5" color='dark' size='lg'>Login</MDBBtn>
@@ -92,6 +93,7 @@ function UserLogin() {
       </MDBCard>
 
     </MDBContainer>
+   
   );
 }
 

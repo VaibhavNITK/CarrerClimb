@@ -26,7 +26,8 @@ export const getCom= async(req,res,next) =>{
         const companies=await Company.find();
         
         res.status(200).json({
-            companies
+          success:true,
+           result: companies,
         })
     }
     catch(error){
@@ -57,8 +58,8 @@ export const applyComUser = async (req, res, next) => {
   export const updateCom = async (req,res,next)=>{
     try{
       const company = await Company.findById(req.params.id);
-    const { name, description, role, branch, timeline, active, appliedUsers } = req.body;
-    if(!name&&!description&&!role&&!branch&&!timeline&&!active&&!appliedUsers){
+    const { name, description, role, branch, deadline, active, appliedUsers } = req.body;
+    if(!name&&!description&&!role&&!branch&&!deadline&&!active&&!appliedUsers){
       res.status(404).json({
         error:"nothing entered",
       })
@@ -76,8 +77,8 @@ export const applyComUser = async (req, res, next) => {
     if(branch){
       company.branch=branch;
     }
-    if(timeline){
-      company.timeline=timeline;
+    if(deadline){
+      company.timeline=deadline;
     }
     if(active){
       company.active=active;

@@ -8,7 +8,7 @@ import {
   MDBRow,
   MDBCol,
   MDBIcon,
-  MDBInput
+  MDBInput 
 }
 from 'mdb-react-ui-kit';
 import "../styles/Login.css"

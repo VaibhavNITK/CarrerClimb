@@ -12,9 +12,9 @@ const AppWrapper = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState({});
-
+  const [admin,setAdmin]= useState({});
   return (
-    <Context.Provider
+    <Context.Provider  
       value={{
         isAuthenticated,
         setIsAuthenticated,
@@ -22,6 +22,8 @@ const AppWrapper = () => {
         setLoading,
         user,
         setUser,
+        admin,
+        setAdmin,
       }}
     >
       <App />

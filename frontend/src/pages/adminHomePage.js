@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import UserNavbar from "./userNavbar";
+import AdminNavbar from "./adminNavbar";
 import axios from "axios";
 import { Context } from "../index";
 import { Link, Navigate } from "react-router-dom";
@@ -7,18 +7,19 @@ import { toast } from "react-hot-toast";
 
 function PocViewPage() {
   const [posts, setPosts] = useState([]);
-  const { isAuthenticated, loading, user } = useContext(Context);
+  const { isAuthenticated, loading, admin } = useContext(Context);
   const [applied, setApplied] = useState([]);
   const [formData, setFormData] = useState({
     description: "",
     role: "",
     branch: "",
     deadline: "",
+    active:false
   });
 
   const fetchPost = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/v1/poc/all", {
+      const response = await axios.get("http://localhost:4000/api/v1/company/all/", {
         withCredentials: true,
       });
       setPosts(response.data.result);
@@ -39,6 +40,7 @@ function PocViewPage() {
     e.preventDefault();
 
     try {
+        console.log(formData)
       const { data } = await axios.put(
         `http://localhost:4000/api/v1/company/update/${id}`,
         formData,
@@ -52,18 +54,28 @@ function PocViewPage() {
     }
   };
 
-  // const myStyle = {
-  //   display: "block",
-  //   width: "50%",
-  // };
-
-  if (posts && posts.length > 0) {
+  const handleClick= async (e,id)=>{
+    e.stopPropagation();
+    try{
+        const response= await axios.delete(`http://localhost:4000/api/v1/company/del/${id}`,
+        {
+            withCredentials:true,
+        })
+        console.log(response)
+        toast.success(response.data.message);
+    }
+    catch(err){
+        console.log(err)
+    }
+  }
+  
     return (
       <>
-        <UserNavbar />
+     
+        <AdminNavbar />
         <div className="container">
           <h1 className="text-center mt-3">
-            Hello {user.name}, here are the companies you are POC for:
+            Hello {admin.name}
           </h1>
           {posts.map((company) => {
             return (
@@ -74,8 +86,8 @@ function PocViewPage() {
                     <input
                       className="form-control mb-2"
                       placeholder="Description of Company"
-                      defaultValue={company.description || ""}
-                      // value={formData.description}
+                      defaultValue={company.description }
+                    //   value={formData.description}
                       onChange={handleChange}
                       name="description"
                     />
@@ -83,15 +95,15 @@ function PocViewPage() {
                       className="form-control mb-2"
                       placeholder="Role"
                       defaultValue={company.role || ""}
-                      // value={formData.role}
+                    //   value={formData.role}
                       onChange={handleChange}
                       name="role"
                     />
                     <input
                       className="form-control mb-2"
                       placeholder="Branch Requirement"
-                      defaultValue={company.branch || ""}
-                      // value={formData.branch}
+                      defaultValue={company.branch }
+                    //   value={formData.branch}
                       onChange={handleChange}
                       name="branch"
                     />
@@ -99,11 +111,22 @@ function PocViewPage() {
                       className="form-control mb-2"
                       placeholder="Deadline"
                       defaultValue={new Date(company.timeline).toLocaleDateString()}
-                      // value={formData.deadline}
+                    //   value={formData.deadline}
                       onChange={handleChange}
                       name="deadline"
                     />
+                    <input 
+                        className="form-control mb-2"
+                      placeholder="Active"
+                      defaultValue={company.active}
+                    //   value={formData.deadline}
+                      onChange={handleChange}
+                      name="active"
+                    />
+                    <div className="d-flex justify-content-between align-items-center">
                     <button className="btn btn-primary">Update</button>
+                    <button onClick={(event) => handleClick(event, company._id)} className="btn btn-primary">Delete</button>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -112,16 +135,7 @@ function PocViewPage() {
         </div>
       </>
     );
-  } else {
-    return (
-      <>
-        <UserNavbar />
-        <h1 className="text-center mt-3">
-          You are not POC for any company
-        </h1>
-      </>
-    );
-  }
+  
 }
 
 export default PocViewPage;

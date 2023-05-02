@@ -23,7 +23,7 @@ export default function AdminNavbar() {
   const logoutHandler = async () => {
     setLoading(true);
     try {
-      const {data}=await axios.get("http://localhost:4000/api/v1/users/logout", {
+      const {data}=await axios.get("http://localhost:4000/api/v1/admin/logout", {
         withCredentials: true,
       });
 
@@ -42,7 +42,7 @@ export default function AdminNavbar() {
   return (
     <MDBNavbar expand='lg' light bgColor='light'>
       <MDBContainer fluid>
-        <MDBNavbarBrand href='/userHomePage'>Home</MDBNavbarBrand>
+        <MDBNavbarBrand href='/adminHomePage'>Home</MDBNavbarBrand>
         <MDBNavbarToggler
           aria-expanded='false'
           aria-label='Toggle navigation'
@@ -53,9 +53,9 @@ export default function AdminNavbar() {
         <MDBCollapse navbar show={showNavSecond}>
           <MDBNavbarNav>
             {/* <MDBNavbarLink active aria-current='page' href='#'>Home</MDBNavbarLink> */}
-            <MDBNavbarLink active aria-current='page' href='/pocView'>POC</MDBNavbarLink>
-            <MDBNavbarLink active aria-current='page' href='/userProfile'>Profile</MDBNavbarLink>
-            <MDBNavbarLink disabled={loading} onClick={logoutHandler} active aria-current='page' href='/userLogin'>Logout</MDBNavbarLink>
+            <MDBNavbarLink active aria-current='page' href='/createNew'>Create</MDBNavbarLink>
+            <MDBNavbarLink active aria-current='page' href='/adminProfile'>Profile</MDBNavbarLink>
+            <MDBNavbarLink disabled={loading} onClick={logoutHandler} active aria-current='page' href='/adminLogin'>Logout</MDBNavbarLink>
             
             {/* <MDBNavbarLink href=''>Disabled</MDBNavbarLink> */}
           </MDBNavbarNav>

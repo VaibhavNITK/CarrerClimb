@@ -1,6 +1,10 @@
-import React from 'react';
+import axios from "axios";
+import React, { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
+import { Navigate } from "react-router-dom";
+import { Context} from "../index";
 import {
-  MDBBtn,
+  MDBBtn, 
   MDBContainer,
   MDBCard,
   MDBCardBody,
@@ -12,7 +16,42 @@ import {
 }
 from 'mdb-react-ui-kit';
 import "../styles/Login.css"
-function AdminLogin() {
+function UserLogin() {
+  const { isAuthenticated, setIsAuthenticated, loading, setLoading } =
+    useContext(Context);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4000/api/v1/admin/login",
+        {
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      toast.success(data.message);
+      setIsAuthenticated(true);
+      setLoading(false);
+    } catch (error) {
+      toast.error(error.response.data.message);
+      setLoading(false);
+      setIsAuthenticated(false);
+    }
+  };
+
+  if (isAuthenticated) return <Navigate to={"/adminHomePage"} />;
   return (
     <MDBContainer className="my-5">
 
@@ -32,15 +71,15 @@ function AdminLogin() {
               </div>
 
               <h5 className="fw-normal my-4 pb-3" style={{letterSpacing: '1px'}}>Admin Login here</h5>
-                <MDBInput wrapperClass='mb-4' label='Name' id='formControlLg' type='name' size="lg"/>
-                <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
-                {/* <MDBInput wrapperClass='mb-4' label='Branch' id='formControlLg' type='branch' size="lg"/> */}
-                <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
+              <form onSubmit={submitHandler}>
+                <MDBInput value={email} onChange={(e) => setEmail(e.target.value)} wrapperClass='mb-4' label='Email address' id='formControlLg1' type='email' size="lg"/>
+                <MDBInput value={password} onChange={(e) => setPassword(e.target.value)} wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
 
-              <MDBBtn className="mb-4 px-5" color='dark' size='lg'>LOGIN</MDBBtn>
+              <MDBBtn disabled={loading} className="mb-4 px-5" color='dark' size='lg'>Login</MDBBtn>
+              </form>
               {/* <a className="small text-muted" href="#!">Forgot password?</a> */}
-              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Are you an User?<a href="/userLogin" style={{color: '#393f81'}}>Login here</a></p>
-              {/* <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Are you an Admin? <a href="#!" style={{color: '#393f81'}}>Login here</a></p> */}
+              {/* <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Don't have an account? <a href="/adminRegister" style={{color: '#393f81'}}>Register here</a></p> */}
+              <p className="mb-5 pb-lg-2" style={{color: '#393f81'}}>Are you a User? <a href="/userLogin" style={{color: '#393f81'}}>Login here</a></p>
               <div className='d-flex flex-row justify-content-start'>
                 <a href="#!" className="small text-muted me-1">Terms of use.</a>
                 <a href="#!" className="small text-muted">Privacy policy</a>
@@ -56,4 +95,4 @@ function AdminLogin() {
   );
 }
 
-export default AdminLogin;
+export default UserLogin;

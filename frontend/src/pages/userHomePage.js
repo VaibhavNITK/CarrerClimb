@@ -15,7 +15,7 @@ function UserHomePage() {
       const response = await axios.get("http://localhost:4000/api/v1/company/all", {
         withCredentials: true,
       });
-      setPosts(response.data.companies);
+      setPosts(response.data.result);
     } catch (err) {
       console.log(err);
     }
@@ -40,50 +40,47 @@ function UserHomePage() {
     }
   };
 
-  if (!isAuthenticated) return <Navigate to={"/userLogin"} />;
+  // if (!isAuthenticated) return <Navigate to={"/userLogin"} />;
   
   return (
     <>
       <UserNavbar />
       <div className="container">
-        <h1>Welcome {user.name}</h1>
-        <div className="card-container">
-          {posts.map((company) => {
-            if (company.active) {
-              const alreadyApplied = applied.includes(company._id);
-              const deadlineDate = new Date(company.timeline).toLocaleDateString();
-              return (
-                <div key={company._id} className="card">
-                  <div className="card-body">
-                    <h5 className="card-title">{company.name}</h5>
-                    <p className="card-text">{company.description}</p>
-                    <div className="card-text-row">
-                      <p className="card-text">
-                        <strong>Role:</strong> {company.role}
-                      </p>
-                      <p className="card-text">
-                        <strong>Branch required:</strong> {company.branch}
-                      </p>
-                      <p className="card-text">
-                        <strong>Deadline:</strong> {deadlineDate}
-                      </p>
-                    </div>
-                    <button
-                      className="btn btn-primary"
-                      onClick={(event) => clickHandler(event, company._id)}
-                      disabled={alreadyApplied}
-                    >
-                      {alreadyApplied ? "Applied" : "Apply"}
-                    </button>
-                  </div>
-                </div>
-              );
-            } else {
-              return null;
-            }
-          })}
-        </div>
-      </div>
+  <h1 className="my-4">Welcome {user.name}</h1>
+  <div className="row">
+    {posts.map((company) => {
+      if (company.active) {
+        const alreadyApplied = applied.includes(company._id);
+        const deadlineDate = new Date(company.timeline).toLocaleDateString();
+        return (
+          <div key={company._id} className="col-lg-4 col-md-6 mb-4">
+            <div className="card h-100">
+              <div className="card-body">
+                <h4 className="card-title">{company.name}</h4>
+                <p className="card-text">{company.description}</p>
+                <ul className="list-unstyled">
+                  <li><strong>Role:</strong> {company.role}</li>
+                  <li><strong>Branch required:</strong> {company.branch}</li>
+                  <li><strong>Deadline:</strong> {deadlineDate}</li>
+                </ul>
+                <button
+                  className="btn btn-primary"
+                  onClick={(event) => clickHandler(event, company._id)}
+                  disabled={alreadyApplied}
+                >
+                  {alreadyApplied ? "Applied" : "Apply"}
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      } else {
+        return null;
+      }
+    })}
+  </div>
+</div>
+
     </>
   );
 }
