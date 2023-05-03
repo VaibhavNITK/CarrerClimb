@@ -36,6 +36,9 @@ Database Connected with ac-2idpws3-shard-00-00.aqnwcgv.mongodb.net**
 - Option for POC to update details of company for which he is assigned POC.
 - Option for logout for both Users and Admin.
 
+- if you want to login as admin use vaibhavagarwal693@gmail.com as email and vaibhav321 as password . I aslo created register page for admin but then i thought it wont make sense as any one can register as admin so thats why im not using admin register page.
+
+
 ## NON-IMPLEMENTED / PLANNED FEATURES
 
 - There is no option for admin and poc to see whoever has applied to that company although backend is ready but not able to integrate it.
