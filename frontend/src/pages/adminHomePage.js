@@ -5,13 +5,14 @@ import { Context } from "../index";
 import { Link, Navigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
-function PocViewPage() {
+function AdminHomePage() {
   const [posts, setPosts] = useState([]);
   const { isAuthenticated, loading, admin } = useContext(Context);
   const [applied, setApplied] = useState([]);
   const [formData, setFormData] = useState({
     description: "",
     role: "",
+    salary:0 ,
     branch: "",
     deadline: "",
     active:false
@@ -94,7 +95,7 @@ function PocViewPage() {
                     <input
                       className="form-control mb-2"
                       placeholder="Role"
-                      defaultValue={company.role || ""}
+                      defaultValue={company.role }
                     //   value={formData.role}
                       onChange={handleChange}
                       name="role"
@@ -106,6 +107,14 @@ function PocViewPage() {
                     //   value={formData.branch}
                       onChange={handleChange}
                       name="branch"
+                    />
+                    <input
+                      className="form-control mb-2"
+                      placeholder="Package per annum"
+                      defaultValue={company.salary }
+                    //   value={formData.branch}
+                      onChange={handleChange}
+                      name="salary"
                     />
                     <input
                       className="form-control mb-2"
@@ -138,4 +147,4 @@ function PocViewPage() {
   
 }
 
-export default PocViewPage;
+export default AdminHomePage;

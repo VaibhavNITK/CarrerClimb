@@ -15,7 +15,7 @@ import {
   MDBCollapse
 } from 'mdb-react-ui-kit';
 
-export default function AdminNavbar() {
+export default function UserNavbar() {
 
     const { isAuthenticated, setIsAuthenticated, loading, setLoading } =
     useContext(Context);
@@ -55,6 +55,7 @@ export default function AdminNavbar() {
             {/* <MDBNavbarLink active aria-current='page' href='#'>Home</MDBNavbarLink> */}
             <MDBNavbarLink active aria-current='page' href='/pocView'>POC</MDBNavbarLink>
             <MDBNavbarLink active aria-current='page' href='/userProfile'>Profile</MDBNavbarLink>
+            <MDBNavbarLink active aria-current='page' href='/userAppliedCompanies'>Applied</MDBNavbarLink>
             <MDBNavbarLink disabled={loading} onClick={logoutHandler} active aria-current='page' href='/userLogin'>Logout</MDBNavbarLink>
             
             {/* <MDBNavbarLink href=''>Disabled</MDBNavbarLink> */}

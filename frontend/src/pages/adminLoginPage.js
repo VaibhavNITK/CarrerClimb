@@ -16,7 +16,7 @@ import {
 }
 from 'mdb-react-ui-kit';
 import "../styles/Login.css"
-function UserLogin() {
+function AdminLogin() {
   const { isAuthenticated, setIsAuthenticated, loading, setLoading } =
     useContext(Context);
   const [email, setEmail] = useState("");
@@ -95,4 +95,4 @@ function UserLogin() {
   );
 }
 
-export default UserLogin;
+export default AdminLogin;

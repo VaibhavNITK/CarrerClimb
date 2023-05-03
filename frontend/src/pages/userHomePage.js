@@ -25,15 +25,19 @@ function UserHomePage() {
     fetchPost();
   }, []);
 
-  const clickHandler = async (event, id) => {
+  const clickHandler = async (event, id,branch) => {
     event.stopPropagation();
     try {
+      if(user.branch===branch){
       const {data} = await axios.put(`http://localhost:4000/api/v1/company/${id}`, {},{
         withCredentials: true,
       });
     //   console.log(response.data);
       toast.success(data.message);
-      setApplied((prevState) => [...prevState, id]);
+      setApplied((prevState) => [...prevState, id]);}
+      else{
+        toast.error("required branch is not there")
+      }
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message);
@@ -41,12 +45,13 @@ function UserHomePage() {
   };
 
   // if (!isAuthenticated) return <Navigate to={"/userLogin"} />;
-  
+  if(posts&&posts.length>0){
+    
   return (
     <>
       <UserNavbar />
       <div className="container">
-  <h1 className="my-4">Welcome {user.name}</h1>
+  <h1 className="text-center mt-3">Welcome {user.name}</h1>
   <div className="row">
     {posts.map((company) => {
       if (company.active) {
@@ -61,11 +66,12 @@ function UserHomePage() {
                 <ul className="list-unstyled">
                   <li><strong>Role:</strong> {company.role}</li>
                   <li><strong>Branch required:</strong> {company.branch}</li>
+                  <li><strong>Package(per annum):</strong> {company.salary}</li>
                   <li><strong>Deadline:</strong> {deadlineDate}</li>
                 </ul>
                 <button
                   className="btn btn-primary"
-                  onClick={(event) => clickHandler(event, company._id)}
+                  onClick={(event) => clickHandler(event, company._id,company.branch)}
                   disabled={alreadyApplied}
                 >
                   {alreadyApplied ? "Applied" : "Apply"}
@@ -82,7 +88,14 @@ function UserHomePage() {
 </div>
 
     </>
-  );
+  );}
+  else{
+    return(<>
+    <UserNavbar />
+      <h1 className="text-center mt-3">Welcome {user.name}</h1>
+      <p>Sorry, currently no company is hiring</p>
+    </>)
+  }
 }
 
 export default UserHomePage;

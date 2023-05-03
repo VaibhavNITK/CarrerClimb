@@ -13,7 +13,9 @@ function PocViewPage() {
     description: "",
     role: "",
     branch: "",
+    salary: 0 ,
     deadline: "",
+    active:false,
   });
 
   const fetchPost = async () => {
@@ -52,11 +54,6 @@ function PocViewPage() {
     }
   };
 
-  // const myStyle = {
-  //   display: "block",
-  //   width: "50%",
-  // };
-
   if (posts && posts.length > 0) {
     return (
       <>
@@ -74,7 +71,7 @@ function PocViewPage() {
                     <input
                       className="form-control mb-2"
                       placeholder="Description of Company"
-                      defaultValue={company.description || ""}
+                      defaultValue={company.description}
                       // value={formData.description}
                       onChange={handleChange}
                       name="description"
@@ -82,15 +79,23 @@ function PocViewPage() {
                     <input
                       className="form-control mb-2"
                       placeholder="Role"
-                      defaultValue={company.role || ""}
+                      defaultValue={company.role}
                       // value={formData.role}
                       onChange={handleChange}
                       name="role"
                     />
                     <input
                       className="form-control mb-2"
+                      placeholder="Package(per annum)"
+                      defaultValue={company.salary}
+                      // value={formData.role}
+                      onChange={handleChange}
+                      name="salary"
+                    />
+                    <input
+                      className="form-control mb-2"
                       placeholder="Branch Requirement"
-                      defaultValue={company.branch || ""}
+                      defaultValue={company.branch}
                       // value={formData.branch}
                       onChange={handleChange}
                       name="branch"
@@ -102,6 +107,14 @@ function PocViewPage() {
                       // value={formData.deadline}
                       onChange={handleChange}
                       name="deadline"
+                    />
+                    <input
+                      className="form-control mb-2"
+                      placeholder="Active"
+                      defaultValue={company.active}
+                      // value={formData.deadline}
+                      onChange={handleChange}
+                      name="active"
                     />
                     <button className="btn btn-primary">Update</button>
                   </form>
@@ -125,3 +138,6 @@ function PocViewPage() {
 }
 
 export default PocViewPage;
+
+
+

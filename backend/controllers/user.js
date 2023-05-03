@@ -48,7 +48,7 @@ export const getProfile= async(req,res,next)=>{
     if(!data) return next(new ErrorHandler("User doesn't Exist",400))
     res.status(200).json({
       success:true,
-      data:data,
+      result: data,
     })
   }
   catch(err){

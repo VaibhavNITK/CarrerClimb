@@ -5,11 +5,10 @@ import { User } from "../models/user.js";
 
 export const newCom =async (req,res,next)  => {
     try{
-        const { name, description, role, pocEmail, branch, timeline, active, appliedUsers } = req.body;
+        const { name, description, role, salary, pocEmail, branch, timeline, active, appliedUsers } = req.body;
         const user = await User.find({ email: pocEmail });
         const { _id } = user[0];
-        const company = await Company.create({ name, description, role, poc: _id, branch, timeline, active, appliedUsers });
-        // console.log(company);
+        await Company.create({ name, description, role, salary, poc: _id, branch, timeline, active, appliedUsers });
         res.status(200).json({
             success:true,
             message:"Company added successfully"
@@ -24,7 +23,12 @@ export const newCom =async (req,res,next)  => {
 export const getCom= async(req,res,next) =>{
     try{
         const companies=await Company.find();
-        
+        if(!companies){
+          return res.status(400).json({
+            success:"false",
+            message:"company not found"
+          })
+        }
         res.status(200).json({
           success:true,
            result: companies,
@@ -40,7 +44,7 @@ export const applyComUser = async (req, res, next) => {
     try {
       const company = await Company.findById(req.params.id);
   
-      if (!company) return next(new ErrorHandler("Task not found", 404));
+      if (!company) return next(new ErrorHandler("Company not found", 404));
   
     //   console.log(req.user._id);
       company.appliedUsers.push(req.user._id);
@@ -58,9 +62,9 @@ export const applyComUser = async (req, res, next) => {
   export const updateCom = async (req,res,next)=>{
     try{
       const company = await Company.findById(req.params.id);
-    const { name, description, role, branch, deadline, active, appliedUsers } = req.body;
-    if(!name&&!description&&!role&&!branch&&!deadline&&!active&&!appliedUsers){
-      res.status(404).json({
+    const { name, description, role,salary, branch, deadline, active, appliedUsers } = req.body;
+    if(!name&&!description&&!role&&!salary&&!branch&&!deadline&&!active&&!appliedUsers){
+     return res.status(404).json({
         error:"nothing entered",
       })
     }
@@ -73,6 +77,9 @@ export const applyComUser = async (req, res, next) => {
     }
     if(role){
       company.role=role;
+    }
+    if(salary){
+      company.salary=salary;
     }
     if(branch){
       company.branch=branch;
@@ -103,6 +110,12 @@ export const applyComUser = async (req, res, next) => {
 export const deleteCom= async(req,res,next)=>{
   try{
     const company=await Company.findById(req.params.id)
+    if(!company){
+    return res.status(404).json({
+        success:"false",
+        message:"company not found"
+      })
+    }
     await company.deleteOne()
     res.status(200).json({
       success:"true",

@@ -8,17 +8,19 @@ const schema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-    
   },
   role:{
     type: String,
+    required: true,
+  },
+  salary:{
+    type: Number,
     required: true,
   },
   poc: {
     required: true,
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    
   },
   branch:{
     type:String,
@@ -33,7 +35,7 @@ const schema = new mongoose.Schema({
      ref: "User" ,
     }],
   active:{
-    required: true,
+    
     type: Boolean,
     default:false,
   },

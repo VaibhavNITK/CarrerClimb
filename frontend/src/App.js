@@ -4,6 +4,7 @@ import LandingPage from './pages/landingPage.js';
 import UserLogin from './pages/userLoginPage';
 import UserRegister from './pages/userRegister.js';
 import UserProfilePage from "./pages/userProfilePage.js";
+import UserAppliedCompanies from "./pages/userAppliedCompanies.js";
 import AdminLogin from './pages/adminLoginPage.js';
 import AdminRegister from "./pages/adminRegisterPage.js";
 import PocViewPage from "./pages/pocViewPage.js";
@@ -61,6 +62,7 @@ function App() {
     <Route path="/userLogin" element={<UserLogin />} />
     <Route path="/userRegister" element={<UserRegister />} />
     <Route path="/userProfile" element={<UserProfilePage />} />
+    <Route path="/userAppliedCompanies" element={<UserAppliedCompanies />} />
     <Route path="/adminLogin" element={<AdminLogin />} />
     {/* <Route path="/adminRegister" element={<AdminRegister />} /> */}
     <Route path="/userHomePage" element={<UserHomePage />} />
