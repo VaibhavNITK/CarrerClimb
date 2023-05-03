@@ -9,7 +9,7 @@
 - In HTTPS column copy the url.
 - Go to your terminal cd to location of your choice then write "git clone https://github.com/VaibhavNITK/IRIS_Rec23_211CS162_MERN.git  " . You can specify the name of folder after MERN.git, if not specified it will create folder with by default name.
 - cd to **backend**
-- Run command **npm i** then **npm install --global nodemon** (if not installed) then **npm run dev** on your terminal.
+- Run command **npm i** then **npm install --global nodemon** (if not installed) then **npm run dev** on your terminal.(**DONT USE NITK NET**)
 - This will be visible on your terminal **Server is listening on port 4000
 Database Connected with ac-2idpws3-shard-00-00.aqnwcgv.mongodb.net**
 ![server running and database connected](https://user-images.githubusercontent.com/95856567/235909083-d60493f1-9099-4dd2-861b-8da59e15c337.png)
