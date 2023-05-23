@@ -3,11 +3,13 @@ import { Context } from "../index";
 import UserNavbar from "./userNavbar";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function UserProfilePage() {
   const { user } = useContext(Context);
   const [skills, setSkills] = useState([]);
   const [links, setLinks] = useState([]);
+  const navigate = useNavigate();
 
   const fetchSkills = async () => {
     try {
@@ -38,9 +40,9 @@ function UserProfilePage() {
     fetchLinks();
   }, []);
 
-  const handleAddSkill = () => {
-    // Implement the logic to add a new skill
-    // You can show a modal or a form to enter skill details and make an API call to add the skill
+  const handleAddSkill = (e) => {
+    e.stopPropagation();
+    navigate("/userSkill");
   };
 
   const handleDeleteSkill = async (skillId) => {
@@ -49,15 +51,14 @@ function UserProfilePage() {
         withCredentials: true,
       });
       toast.success(data.message);
-      fetchSkills(); // Refresh the skills after deletion
+      fetchSkills();
     } catch (err) {
       toast.error(err.response.data.message);
     }
   };
 
   const handleAddLink = () => {
-    // Implement the logic to add a new link
-    // You can show a modal or a form to enter link details and make an API call to add the link
+    navigate("/userLink");
   };
 
   const handleDeleteLink = async (linkId) => {
@@ -66,7 +67,7 @@ function UserProfilePage() {
         withCredentials: true,
       });
       toast.success(data.message);
-      fetchLinks(); // Refresh the links after deletion
+      fetchLinks();
     } catch (err) {
       toast.error(err.response.data.message);
     }
@@ -100,7 +101,7 @@ function UserProfilePage() {
                     <p className="card-text">{skill.description}</p>
                     <p className="card-text">Proficiency: {skill.levelOfProficiency}</p>
                     <p className="card-text">Experience: {skill.yearsOfExperience} years</p>
-                    <button className="btn btn-danger" onClick={() => handleDeleteSkill(skill._id)}>
+                    <button className="btn btn-danger float-end" onClick={() => handleDeleteSkill(skill._id)}>
                       Delete Skill
                     </button>
                   </div>
@@ -127,7 +128,7 @@ function UserProfilePage() {
                     <a href={link.link} className="card-link" target="_blank" rel="noopener noreferrer">
                       {link.link}
                     </a>
-                    <button className="btn btn-danger" onClick={() => handleDeleteLink(link._id)}>
+                    <button className="btn btn-danger float-end" onClick={() => handleDeleteLink(link._id)}>
                       Delete Link
                     </button>
                   </div>
@@ -146,6 +147,7 @@ function UserProfilePage() {
 }
 
 export default UserProfilePage;
+
 
 
 
