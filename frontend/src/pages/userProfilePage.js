@@ -4,7 +4,7 @@ import UserNavbar from "./userNavbar";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
+import "../styles/userProfilePage.css";
 function UserProfilePage() {
   const { user } = useContext(Context);
   const [skills, setSkills] = useState([]);
@@ -76,32 +76,32 @@ function UserProfilePage() {
   return (
     <>
       <UserNavbar />
-      <div className="card">
-        <div className="card-body">
-          <h1 className="card-title">Name:</h1>
-          <p className="card-text">{user.name}</p>
+      <div className="upp_card">
+        <div className="upp_card-body">
+          <h1 className="upp_card-title">Name:</h1>
+          <p className="upp_card-text">{user.name}</p>
 
-          <h1 className="card-title">Email:</h1>
-          <p className="card-text">{user.email}</p>
+          <h1 className="upp_card-title">Email:</h1>
+          <p className="upp_card-text">{user.email}</p>
 
-          <h1 className="card-title">Branch:</h1>
-          <p className="card-text">{user.branch}</p>
+          <h1 className="upp_card-title">Branch:</h1>
+          <p className="upp_card-text">{user.branch}</p>
         </div>
       </div>
 
-      <div className="card">
-        <div className="card-body">
-          <h1>Skills:</h1>
+      <div className="upp_card">
+        <div className="upp_card-body">
+          <h1 className="upp_card-title">Skills:</h1>
           {skills.map((skill) => {
             if (skill.user === user._id) {
               return (
-                <div className="card" key={skill._id}>
-                  <div className="card-body">
-                    <h5 className="card-title">{skill.name}</h5>
-                    <p className="card-text">{skill.description}</p>
-                    <p className="card-text">Proficiency: {skill.levelOfProficiency}</p>
-                    <p className="card-text">Experience: {skill.yearsOfExperience} years</p>
-                    <button className="btn btn-danger float-end" onClick={() => handleDeleteSkill(skill._id)}>
+                <div className="upp_skill-card" key={skill._id}>
+                  <div className="upp_card-body">
+                    <h5 className="upp_card-title">{skill.name}</h5>
+                    <p className="upp_card-text">{skill.description}</p>
+                    <p className="upp_card-text">Proficiency: {skill.levelOfProficiency}</p>
+                    <p className="upp_card-text">Experience: {skill.yearsOfExperience} years</p>
+                    <button className="upp_btn upp_btn-danger upp_float-end" onClick={() => handleDeleteSkill(skill._id)}>
                       Delete Skill
                     </button>
                   </div>
@@ -110,25 +110,25 @@ function UserProfilePage() {
             }
             return null;
           })}
-          <button className="btn btn-primary" onClick={handleAddSkill}>
+          <button className="upp_btn upp_btn-primary" onClick={handleAddSkill}>
             Add Skill
           </button>
         </div>
       </div>
 
-      <div className="card">
-        <div className="card-body">
-          <h1>Links:</h1>
+      <div className="upp_card">
+        <div className="upp_card-body">
+          <h1 className="upp_card-title">Links:</h1>
           {links.map((link) => {
             if (link.user === user._id) {
               return (
-                <div className="card" key={link._id}>
-                  <div className="card-body">
-                    <h5 className="card-title">{link.name}</h5>
-                    <a href={link.link} className="card-link" target="_blank" rel="noopener noreferrer">
+                <div className="upp_link-card" key={link._id}>
+                  <div className="upp_card-body">
+                    <h5 className="upp_card-title">{link.name}</h5>
+                    <a href={link.link} className="upp_card-link" target="_blank" rel="noopener noreferrer">
                       {link.link}
                     </a>
-                    <button className="btn btn-danger float-end" onClick={() => handleDeleteLink(link._id)}>
+                    <button className="upp_btn upp_btn-danger upp_float-end" onClick={() => handleDeleteLink(link._id)}>
                       Delete Link
                     </button>
                   </div>
@@ -137,7 +137,7 @@ function UserProfilePage() {
             }
             return null;
           })}
-          <button className="btn btn-primary" onClick={handleAddLink}>
+          <button className="upp_btn upp_btn-primary" onClick={handleAddLink}>
             Add Link
           </button>
         </div>
@@ -147,6 +147,7 @@ function UserProfilePage() {
 }
 
 export default UserProfilePage;
+
 
 
 
