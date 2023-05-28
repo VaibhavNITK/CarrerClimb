@@ -16,4 +16,4 @@ const schema = new mongoose.Schema({
   
 });
 
-export const File = mongoose.model("File", schema);
+export const File = mongoose.model("File", schema); 

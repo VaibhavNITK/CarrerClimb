@@ -1,5 +1,7 @@
 import { Company } from "../models/company.js";
 import { User } from "../models/user.js";
+import ErrorHandler from "../middlewares/error.js";
+import { errorMiddleware } from "../middlewares/error.js";
 
 
 
@@ -47,6 +49,9 @@ export const applyComUser = async (req, res, next) => {
       if (!company) return next(new ErrorHandler("Company not found", 404));
   
     //   console.log(req.user._id);
+    const  checker=company.appliedUsers.includes(req.user._id)
+    console.log(checker);
+    if(checker) return next(new ErrorHandler("Already applied",404))
       company.appliedUsers.push(req.user._id);
       await company.save();
   
