@@ -2,7 +2,7 @@ import { Link } from "../models/link.js";
 import ErrorHandler from "../middlewares/error.js";
 
 export const addLink = async (req, res, next) => {
-  try {
+  try { 
     const userId = req.user._id;
     const linkName = req.body.name;
     const linkUrl = req.body.link;

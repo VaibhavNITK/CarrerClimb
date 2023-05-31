@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post("/new",isAuthenticated, addLink);
 
-
 router.get("/all",isAuthenticated, getLinks);
 
 router.delete("/delete/:id", isAuthenticated, deleteLink);

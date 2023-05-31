@@ -13,6 +13,7 @@ import AdminHomePage from "./pages/adminHomePage.js";
 import AdminProfilePage from "./pages/adminProfilePage.js";
 import AddLinkPage from "./pages/addLinkPage.js";
 import AddSkillPage from "./pages/addSkillPage.js";
+import PocViewPageMain from "./pages/pocViewPageMain.js";
 import CreateNew from "./pages/createNew.js";
 import { Toaster } from "react-hot-toast";
 import { useContext, useEffect } from "react";
@@ -73,7 +74,8 @@ function App() {
     <Route path="/adminHomePage" element={<AdminHomePage />} />
     <Route path="/adminProfile" element={<AdminProfilePage />} />
     <Route path="/createNew" element={<CreateNew />} />
-    <Route path="/pocView" element={<PocViewPage/>} />
+    <Route path="/pocView/company/:id" element={<PocViewPage/>} />
+    <Route path="/pocViewMain" element={<PocViewPageMain/>} />
     </Routes>
     <Toaster />
     </div>

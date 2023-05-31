@@ -2,28 +2,40 @@ import React, { useEffect, useState, useContext } from "react";
 import UserNavbar from "./userNavbar";
 import axios from "axios";
 import { Context } from "../index";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 function PocViewPage() {
-  const [posts, setPosts] = useState([]);
   const { isAuthenticated, loading, user } = useContext(Context);
   const [applied, setApplied] = useState([]);
   const [formData, setFormData] = useState({
+    name:"",
     description: "",
     role: "",
     branch: "",
-    salary: 0 ,
+    salary: 0,
     deadline: "",
-    active:false,
+    active: false,
   });
+
+  const { id } = useParams(); // Access the ID from the URL
 
   const fetchPost = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/v1/poc/all", {
+      const response = await axios.get(`http://localhost:4000/api/v1/company/com/${id}`, {
         withCredentials: true,
       });
-      setPosts(response.data.result);
+      const { company } = response.data;
+      console.log(company);
+      setFormData({
+        name: company.name,
+        description: company.description,
+        role: company.role,
+        branch: company.branch,
+        salary: company.salary,
+        deadline: company.deadline,
+        active: company.active,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -54,90 +66,88 @@ function PocViewPage() {
     }
   };
 
-  if (posts && posts.length > 0) {
-    return (
-      <>
-        <UserNavbar />
-        <div className="container">
-          <h1 className="text-center mt-3">
-            Hello {user.name}, here are the companies you are POC for:
-          </h1>
-          {posts.map((company) => {
-            return (
-              <div key={company._id} className="card m-4">
-                <div className="card-body">
-                  <h5 className="card-title">{company.name}</h5>
-                  <form onSubmit={(event) => handleSubmit(event, company._id)}>
-                    <input
-                      className="form-control mb-2"
-                      placeholder="Description of Company"
-                      defaultValue={company.description}
-                      // value={formData.description}
-                      onChange={handleChange}
-                      name="description"
-                    />
-                    <input
-                      className="form-control mb-2"
-                      placeholder="Role"
-                      defaultValue={company.role}
-                      // value={formData.role}
-                      onChange={handleChange}
-                      name="role"
-                    />
-                    <input
-                      className="form-control mb-2"
-                      placeholder="Package(per annum)"
-                      defaultValue={company.salary}
-                      // value={formData.role}
-                      onChange={handleChange}
-                      name="salary"
-                    />
-                    <input
-                      className="form-control mb-2"
-                      placeholder="Branch Requirement"
-                      defaultValue={company.branch}
-                      // value={formData.branch}
-                      onChange={handleChange}
-                      name="branch"
-                    />
-                    <input
-                      className="form-control mb-2"
-                      placeholder="Deadline"
-                      defaultValue={new Date(company.timeline).toLocaleDateString()}
-                      // value={formData.deadline}
-                      onChange={handleChange}
-                      name="deadline"
-                    />
-                    <input
-                      className="form-control mb-2"
-                      placeholder="Active"
-                      defaultValue={company.active}
-                      // value={formData.deadline}
-                      onChange={handleChange}
-                      name="active"
-                    />
-                    <button className="btn btn-primary">Update</button>
-                  </form>
-                </div>
+  return (
+    <>
+      <UserNavbar />
+      <div className="container">
+        <h1 className="text-center mt-3"></h1>
+        <div className="card m-4">
+          <div className="card-body">
+            <h5 className="card-title">{formData.name}</h5>
+            <form onSubmit={(event) => handleSubmit(event, id)}>
+              <div className="mb-2">
+                <label htmlFor="description" className="form-label">Description of Company</label>
+                <input
+                  id="description"
+                  className="form-control"
+                  placeholder="Description of Company"
+                  value={formData.description}
+                  onChange={handleChange}
+                  name="description"
+                />
               </div>
-            );
-          })}
+              <div className="mb-2">
+                <label htmlFor="role" className="form-label">Role</label>
+                <input
+                  id="role"
+                  className="form-control"
+                  placeholder="Role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  name="role"
+                />
+              </div>
+              <div className="mb-2">
+                <label htmlFor="salary" className="form-label">Package (per annum)</label>
+                <input
+                  id="salary"
+                  className="form-control"
+                  placeholder="Package (per annum)"
+                  value={formData.salary}
+                  onChange={handleChange}
+                  name="salary"
+                />
+              </div>
+              <div className="mb-2">
+                <label htmlFor="branch" className="form-label">Branch Requirement</label>
+                <input
+                  id="branch"
+                  className="form-control"
+                  placeholder="Branch Requirement"
+                  value={formData.branch}
+                  onChange={handleChange}
+                  name="branch"
+                />
+              </div>
+              <div className="mb-2">
+                <label htmlFor="deadline" className="form-label">Deadline</label>
+                <input
+                  id="deadline"
+                  className="form-control"
+                  placeholder="Deadline"
+                  value={formData.deadline}
+                  onChange={handleChange}
+                  name="deadline"
+                />
+              </div>
+              <div className="mb-2">
+                <label htmlFor="active" className="form-label">Active</label>
+                <input
+                  id="active"
+                  className="form-control"
+                  placeholder="Active"
+                  value={formData.active}
+                  onChange={handleChange}
+                  name="active"
+                />
+              </div>
+              <button className="btn btn-primary">Update</button>
+            </form>
+          </div>
         </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <UserNavbar />
-        <h1 className="text-center mt-3">
-          You are not POC for any company
-        </h1>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 }
 
 export default PocViewPage;
-
-
-

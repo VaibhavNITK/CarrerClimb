@@ -53,7 +53,7 @@ export default function UserNavbar() {
         <MDBCollapse navbar show={showNavSecond}>
           <MDBNavbarNav>
             {/* <MDBNavbarLink active aria-current='page' href='#'>Home</MDBNavbarLink> */}
-            <MDBNavbarLink active aria-current='page' href='/pocView'>POC</MDBNavbarLink>
+            <MDBNavbarLink active aria-current='page' href='/pocViewMain'>POC</MDBNavbarLink>
             <MDBNavbarLink active aria-current='page' href='/userProfile'>Profile</MDBNavbarLink>
             <MDBNavbarLink active aria-current='page' href='/userAppliedCompanies'>Applied</MDBNavbarLink>
             <MDBNavbarLink disabled={loading} onClick={logoutHandler} active aria-current='page' href='/userLogin'>Logout</MDBNavbarLink>

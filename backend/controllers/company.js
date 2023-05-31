@@ -42,6 +42,21 @@ export const getCom= async(req,res,next) =>{
     }
 }
 
+export const getComById=async(req,res,next)=>{
+  try{
+    const id=req.params.id
+    const company= await Company.findById(id)
+
+    res.status(200).json({
+      success:true,
+      company: company
+    })
+  }
+  catch(error){
+    next(error)
+  }
+}
+
 export const applyComUser = async (req, res, next) => {
     try {
       const company = await Company.findById(req.params.id);
