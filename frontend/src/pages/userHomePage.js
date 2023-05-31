@@ -50,8 +50,8 @@ function UserHomePage() {
     return (
       <>
         <UserNavbar />
-        <div className="container">
-          <h1 className="text-center mt-3 uhp_heading">Welcome {user.name}</h1>
+        <div className="container" style={{backgroundColor: "lightblue"}}>
+          <h1 className="text-center mt-3 uhp_heading" style={{backgroundColor: "#F7CAC9"}}>Welcome {user.name}</h1>
           <div className="row uhp_post-container">
             {posts.map((company) => {
               if (company.active) {
@@ -60,7 +60,7 @@ function UserHomePage() {
                 return (
                   <div key={company._id} className="col-lg-4 col-md-6 mb-4">
                     <div className="card h-100 uhp_post-card">
-                      <div className="card-body">
+                      <div className="card-body" style={{backgroundColor: "lightgrey"}} >
                         <h4 className="card-title uhp_company-name">{company.name}</h4>
                         <p className="card-text uhp_company-description">{company.description}</p>
                         <ul className="list-unstyled">
