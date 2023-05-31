@@ -43,7 +43,8 @@ function AddSkillPage() {
   return (
     <>
       <UserNavbar />
-      <div className="container">
+      <div style={{backgroundColor:"#dde8cb"}}>
+      <div className="container" >
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="name" className="form-label">
@@ -96,10 +97,11 @@ function AddSkillPage() {
               onChange={(e) => setYearsOfExperience(Number(e.target.value))}
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" style={{marginBottom:"50px",marginTop:"20px"}}>
             Submit
           </button>
         </form>
+      </div>
       </div>
     </>
   );

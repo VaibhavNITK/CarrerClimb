@@ -76,27 +76,25 @@ function UserProfilePage() {
   return (
     <>
       <UserNavbar />
-      <div className="upp_card">
+      <div style={{backgroundColor:"#ffd7d7"}}>
+      <div className="upp_card" style={{width: "500px",padding: "5px",border: "5px solid green", backgroundColor: "#A0DAA9" }}>
         <div className="upp_card-body">
-          <h1 className="upp_card-title">Name:</h1>
-          <p className="upp_card-text">{user.name}</p>
-
-          <h1 className="upp_card-title">Email:</h1>
-          <p className="upp_card-text">{user.email}</p>
-
-          <h1 className="upp_card-title">Branch:</h1>
-          <p className="upp_card-text">{user.branch}</p>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOlzk9Jxrwy_wSaWo687HKq5wlByl7UZW-XA&usqp=CAU" style={{width: "300px",height: "250px",padding:"10px"}}></img>
+          <h1 className="upp_card-title">Name:{user.name}</h1>
+          <h1 className="upp_card-title">Email:{user.email}</h1>
+          <h1 className="upp_card-title">Branch:{user.branch}</h1>
+          
         </div>
       </div>
-
-      <div className="upp_card">
+  
+      <div className="upp_card" style={{width: "1250px",padding: "5px",border: "5px solid green", backgroundColor: "#A0DAA9" }}>
         <div className="upp_card-body">
           <h1 className="upp_card-title">Skills:</h1>
           {skills.map((skill) => {
             if (skill.user === user._id) {
               return (
-                <div className="upp_skill-card" key={skill._id}>
-                  <div className="upp_card-body">
+                <div className="upp_skill-card" style={{backgroundColor:"#EDD59E"}} key={skill._id}>
+                  <div className="upp_card-body" style={{backgroundColor:"lightgray"}}>
                     <h5 className="upp_card-title">{skill.name}</h5>
                     <p className="upp_card-text">{skill.description}</p>
                     <p className="upp_card-text">Proficiency: {skill.levelOfProficiency}</p>
@@ -116,7 +114,7 @@ function UserProfilePage() {
         </div>
       </div>
 
-      <div className="upp_card">
+      <div className="upp_card" style={{width: "1250px",padding: "5px",border: "5px solid green", backgroundColor: "#A0DAA9" }}>
         <div className="upp_card-body">
           <h1 className="upp_card-title">Links:</h1>
           {links.map((link) => {
@@ -141,6 +139,7 @@ function UserProfilePage() {
             Add Link
           </button>
         </div>
+      </div>
       </div>
     </>
   );
