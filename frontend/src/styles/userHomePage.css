@@ -1,14 +1,14 @@
 .uhp_heading {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 50px;
   }
   
   .uhp_post-container {
-    margin-top: 20px;
+    margin-top: 50px;
   }
   
   .uhp_post-card {
-    border: 1px solid #dee2e6;
+    /* border: 1px solid #dee2e6; */
     border-radius: 5px;
     margin-bottom: 20px;
   }
