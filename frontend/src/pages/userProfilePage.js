@@ -5,10 +5,12 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import "../styles/userProfilePage.css";
+
 function UserProfilePage() {
   const { user } = useContext(Context);
   const [skills, setSkills] = useState([]);
   const [links, setLinks] = useState([]);
+  const [resumeFile, setResumeFile] = useState(null);
   const navigate = useNavigate();
 
   const fetchSkills = async () => {
@@ -16,7 +18,6 @@ function UserProfilePage() {
       const response = await axios.get("http://localhost:4000/api/v1/skills/all", {
         withCredentials: true,
       });
-      console.log(response.data);
       setSkills(response.data.skills);
     } catch (err) {
       console.log(err);
@@ -28,7 +29,6 @@ function UserProfilePage() {
       const response = await axios.get("http://localhost:4000/api/v1/link/all", {
         withCredentials: true,
       });
-      console.log(response.data);
       setLinks(response.data.links);
     } catch (err) {
       console.log(err);
@@ -70,6 +70,27 @@ function UserProfilePage() {
       fetchLinks();
     } catch (err) {
       toast.error(err.response.data.message);
+    }
+  };
+
+  const handleResumeUpload = async (e) => {
+    e.preventDefault();
+
+    if (!resumeFile) {
+      toast.error("Please select a resume file");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("resume", resumeFile);
+
+    try {
+      const response = await axios.post("http://localhost:4000/api/v1/resume/upload", formData, {
+        withCredentials: true,
+      });
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
 
@@ -140,12 +161,23 @@ function UserProfilePage() {
           </button>
         </div>
       </div>
+
+      <div className="upp_card">
+        <div className="upp_card-body">
+          <h1 className="upp_card-title">Resume:</h1>
+          <form onSubmit={handleResumeUpload}>
+            <input type="file" accept=".pdf,.doc,.docx" onChange={(e) => setResumeFile(e.target.files[0])} />
+            <button type="submit">Upload Resume</button>
+          </form>
+        </div>
+      </div>
       </div>
     </>
   );
 }
 
 export default UserProfilePage;
+
 
 
 

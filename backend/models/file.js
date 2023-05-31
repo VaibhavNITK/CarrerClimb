@@ -5,13 +5,13 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
- userId:{
+ uploaderId:{
     type :mongoose.Schema.Types.ObjectId,
     ref: "User" ,
  },
- companyId:{
-    type :mongoose.Schema.Types.ObjectId,
-    ref: "Company" ,
+ path:{
+   type: String,
+   required: true,
  }
   
 });
