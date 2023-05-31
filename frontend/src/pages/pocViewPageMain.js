@@ -30,10 +30,7 @@ function PocViewPageMain() {
     navigate(`/pocView/company/${companyId}`);
   };
 
-  const handleOpenStudentInfo = (studentId) => {
-    navigate(`/pocView/student/${studentId}`);
-  };
-
+  
   if (posts && posts.length > 0) {
     return (
       <>
@@ -67,20 +64,7 @@ function PocViewPageMain() {
                       {company.active ? "Yes" : "No"}
                     </li>
                   </ul>
-                  <h6 className="mt-4">Applied Students:</h6>
-                  <ul className="list-group">
-                    {company.appliedUsers.map((student) => (
-                      <li key={student._id} className="list-group-item">
-                        {student.name}
-                        <button
-                          className="btn btn-link"
-                          onClick={() => handleOpenStudentInfo(student._id)}
-                        >
-                          View Info
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
+                  
                   <button
                     className="btn btn-primary mt-3"
                     onClick={() => handleOpenCompanyDetails(company._id)}
@@ -105,3 +89,4 @@ function PocViewPageMain() {
 }
 
 export default PocViewPageMain;
+

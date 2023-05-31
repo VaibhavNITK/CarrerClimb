@@ -8,6 +8,7 @@ import UserAppliedCompanies from "./pages/userAppliedCompanies.js";
 import AdminLogin from './pages/adminLoginPage.js';
 import AdminRegister from "./pages/adminRegisterPage.js";
 import PocViewPage from "./pages/pocViewPage.js";
+import PocViewPageUserData from "./pages/pocViewPageUserData.js";
 import UserHomePage from "./pages/userHomePage.js";
 import AdminHomePage from "./pages/adminHomePage.js";
 import AdminProfilePage from "./pages/adminProfilePage.js";
@@ -76,6 +77,7 @@ function App() {
     <Route path="/createNew" element={<CreateNew />} />
     <Route path="/pocView/company/:id" element={<PocViewPage/>} />
     <Route path="/pocViewMain" element={<PocViewPageMain/>} />
+    <Route path="/pocView/user/:id" element={<PocViewPageUserData/>} />
     </Routes>
     <Toaster />
     </div>

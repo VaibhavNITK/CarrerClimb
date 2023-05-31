@@ -21,7 +21,6 @@ export const app = express();
 // Configure Multer storage for resume uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    
     cb(null, './uploads');
   },
   filename: function (req, file, cb) {
@@ -68,25 +67,46 @@ app.post('/api/v1/resume/upload', isAuthenticated, upload.single('resume'), asyn
   }
 });
 
+app.get('/api/v1/resume/:id', async (req, res) => {
+  const userId = req.params.id;
 
-app.get('/api/v1/resume/:userId', (req, res) => {
-  const userId = req.params.userId;
+  try {
+    const file = await File.findOne({ uploaderId: userId });
 
-  File.findOne({ uploaderId: userId })
-    .then((file) => {
-      if (!file) {
-        return res.status(404).json({ message: 'Resume not found' });
-      }
+    if (!file) {
+      return res.status(404).json({ message: 'Resume not found' });
+    }
 
-      const filePath = file.path;
-      res.sendFile(filePath);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json({ message: 'Failed to retrieve resume' });
+    const filePath = `C:/Users/91748/Desktop/IRMS/backend/uploads/${file.filename}`;
+    res.status(200).json({
+      success: true,
+      path: filePath,
     });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to retrieve resume' });
+  }
 });
 
+app.get('/api/v1/resume/download/:id', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const file = await File.findOne({ uploaderId: userId });
+
+    if (!file) {
+      return res.status(404).json({ message: 'Resume not found' });
+    }
+
+    const filePath = `C:/Users/91748/Desktop/IRMS/backend/uploads/${file.filename}`;
+    const fileName = file.filename;
+
+    res.download(filePath, fileName);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to download resume' });
+  }
+});
 
 // Using routes
 app.use("/api/v1/admin", adminRouter);
@@ -102,4 +122,3 @@ app.get("/", (req, res) => {
 
 // Using Error Middleware
 app.use(errorMiddleware);
-

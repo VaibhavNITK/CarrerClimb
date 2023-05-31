@@ -3,13 +3,15 @@ import UserNavbar from "./userNavbar";
 import axios from "axios";
 import { Context } from "../index";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 function PocViewPage() {
   const { isAuthenticated, loading, user } = useContext(Context);
   const [applied, setApplied] = useState([]);
+  const [sid, setSid] = useState([]);
   const [formData, setFormData] = useState({
-    name:"",
+    name: "",
     description: "",
     role: "",
     branch: "",
@@ -19,6 +21,7 @@ function PocViewPage() {
   });
 
   const { id } = useParams(); // Access the ID from the URL
+  
 
   const fetchPost = async () => {
     try {
@@ -36,6 +39,7 @@ function PocViewPage() {
         deadline: company.deadline,
         active: company.active,
       });
+      setSid(company.appliedUsers);
     } catch (err) {
       console.log(err);
     }
@@ -64,6 +68,10 @@ function PocViewPage() {
     } catch (err) {
       console.log(err);
     }
+  };
+  const navigate = useNavigate();
+  const handleOpenStudentInfo = (studentId) => {
+    navigate(`/pocView/user/${studentId}`);
   };
 
   return (
@@ -145,6 +153,26 @@ function PocViewPage() {
             </form>
           </div>
         </div>
+        {sid.length > 0 && (
+          <div className="card m-4">
+            <div className="card-body">
+              <h5 className="card-title">Applied Students</h5>
+              <ul className="list-group">
+                {sid.map((studentId) => (
+                  <li key={studentId} className="list-group-item">
+                    {studentId}
+                    <button
+                      className="btn btn-link"
+                      onClick={() => handleOpenStudentInfo(studentId)}
+                    >
+                      View Info
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

@@ -38,6 +38,21 @@ export const getLinks = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getLinksById = async (req, res, next) => {
+  try {
+    const id=req.params.id;
+    const links = await Link.find({ user: id});
+    res.status(200).json({
+      success: true,
+      links: links,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 export const deleteLink = (req, res, next) => {
   try {
     const linkId = req.params.id;

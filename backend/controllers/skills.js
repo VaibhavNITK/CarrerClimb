@@ -39,6 +39,21 @@ export const getSkills = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getSkillsById=async(req,res,next)=>{
+  try{
+    const id=req.params.id;
+    const skills = await Skills.find({user:id})
+    res.status(200).json({
+      success:true,
+      skills:skills
+    })
+  }
+  catch(error){
+    next(error)
+  }
+}
+
 export const updateSkills = async (req, res, next) => {
   try {
     const skillId = req.params.id;
