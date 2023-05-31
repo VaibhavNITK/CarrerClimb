@@ -12,6 +12,8 @@ import PocViewPageUserData from "./pages/pocViewPageUserData.js";
 import UserHomePage from "./pages/userHomePage.js";
 import AdminHomePage from "./pages/adminHomePage.js";
 import AdminProfilePage from "./pages/adminProfilePage.js";
+import AdminHomePageMain from "./pages/adminHomePageMain.js";
+import AdminHomePageUserData from "./pages/adminHomePageUserData.js";
 import AddLinkPage from "./pages/addLinkPage.js";
 import AddSkillPage from "./pages/addSkillPage.js";
 import PocViewPageMain from "./pages/pocViewPageMain.js";
@@ -72,7 +74,9 @@ function App() {
     <Route path="/userLink" element={<AddLinkPage />} />
     <Route path="/userSkill" element={<AddSkillPage />} />
     <Route path="/userHomePage" element={<UserHomePage />} />
-    <Route path="/adminHomePage" element={<AdminHomePage />} />
+    <Route path="/adminHomePage" element={<AdminHomePageMain />} />
+    <Route path="/admin/company/:id" element={<AdminHomePage />} />
+    <Route path="/admin/user/:id" element={<AdminHomePageUserData />} />
     <Route path="/adminProfile" element={<AdminProfilePage />} />
     <Route path="/createNew" element={<CreateNew />} />
     <Route path="/pocView/company/:id" element={<PocViewPage/>} />
