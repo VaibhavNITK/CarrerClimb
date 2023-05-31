@@ -54,10 +54,11 @@ function CreateNew(){
   return (
     <>
       <AdminNavbar />
-      <div className="container" style={{marginTop:"30px"}}>
-        <form onSubmit={submitHandler}>
+      <div > 
+      <div className="container" >
+        <form onSubmit={submitHandler} >
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">Name</label>
+            <label htmlFor="name" className="form-label" style={{margintop:"100px"}}>Name</label>
             <input value={name} onChange={(e)=>setName(e.target.value)} type="text" className="form-control" id="name" placeholder="Enter name" />
           </div>
           <div className="mb-3">
@@ -86,6 +87,7 @@ function CreateNew(){
           </div>
           <button disabled={loading} type="submit" className="btn btn-primary">Submit</button>
         </form>
+      </div>
       </div>
     </>
   );

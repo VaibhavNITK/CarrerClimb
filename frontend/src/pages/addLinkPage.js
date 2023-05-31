@@ -3,7 +3,7 @@ import UserNavbar from "./userNavbar";
 import { toast } from "react-hot-toast";
 import { Context } from "../index.js";
 import axios from "axios";
-
+import "../styles/addLinkPage.css"
 function AddLinkPage() {
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
@@ -36,13 +36,14 @@ function AddLinkPage() {
   return (
     <>
       <UserNavbar />
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">
+      <div className="alp_container" >
+        <form onSubmit={handleSubmit} className="alp_form">
+          <div className="mb-3" style={{marginTop:"50px"}}>
+            <label htmlFor="name" className="form-label" >
               Name
             </label>
             <input
+              style={{width:"500px"}}
               type="text"
               className="form-control"
               id="name"
@@ -52,10 +53,11 @@ function AddLinkPage() {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="url" className="form-label">
+            <label htmlFor="url" className="form-label" >
               URL
             </label>
             <input
+            style={{width:"500px"}}
               type="text"
               className="form-control"
               id="url"
